@@ -24,7 +24,7 @@ jobs:
     ## Deal with Fortran compiler installation
     # Install gfortran
     - name: Install gfortran compiler
-      run: sudo apt-get install gfortran
+      run: sudo apt-get install gfortran-7
 
     - name: Fix install script
       shell: bash
@@ -41,8 +41,8 @@ jobs:
       run: |
 
         sudo apt install libblas-dev liblapack-dev
-        
-        sed -i 's:GEMNF_HOME=${HOME}/GEM_fit:GEMNF_HOME=/home/runner/work/GEM_fit/GEM_fit/:g' setup.profile
+
+        sed -i 's:GEMNF_HOME=${HOME}/GEM_fit:GEMNF_HOME=/home/runner/work/GEM_fit/GEM_fit:g' setup.profile
 
         source setup.profile
 
