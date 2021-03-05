@@ -16,8 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      env:
-        fortran-compiler: gfortran
+    env:
+      fortran-compiler: gfortran
     #   matrix:
     #     fortran-compiler: [gfortran, gfortran-8, gfortran-9, ifort]
     # env:
