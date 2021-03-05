@@ -35,9 +35,12 @@ jobs:
       ## Figure out Intel compiler at a later time....
       ## Fix the executable path in the setup
         #sed -i 's:GEMNF_HOME=${HOME}/GEM_fit:GEMNF_HOME=/new/path/GEM_fit:g' setup.profile
+        #GitHub CI is /home/runner/work/
       ## Source the setup
       run: |
         sudo apt install libblas-dev liblapack-dev
+
+        sed -i 's:GEMNF_HOME=${HOME}/GEM_fit:GEMNF_HOME=/home/runner/work/GEM_fit/:g' setup.profile
 
         source setup.profile
 
