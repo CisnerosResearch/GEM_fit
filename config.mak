@@ -5,8 +5,8 @@ SHARED_LIBS=1
 DEBUG=1
 
 ## Platform options: gfortran ifc
-#PLATFORM = gfortran
-PLATFORM = ifort
+PLATFORM = gfortran
+#PLATFORM = ifort
 
 ## Path to BLAS and LAPACK libraries
 LAPACK=/usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3
