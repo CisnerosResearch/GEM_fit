@@ -16,13 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-    env:
-      fortran-compiler: gfortran
-    #   matrix:
-    #     fortran-compiler: [gfortran, gfortran-8, gfortran-9, ifort]
-    # env:
-    #   F90: ${{ matrix.fortran-compiler }}
-    #   FC: ${{ matrix.fortran-compiler }}
 
     steps:
     ## Checkout the repository
@@ -31,21 +24,7 @@ jobs:
     ## Deal with Fortran compiler installation
     # Install gfortran
     - name: Install gfortran compiler
-      run: sudo apt-get install ${{ fortran-compiler }}
-
-    ### gfortran compiler in Matrix
-    # - name: Install gfortran compiler
-    #   if: contains(matrix.fortran-compiler, 'gfortran')
-    #   run: sudo apt-get install ${{ matrix.fortran-compiler }}
-
-    ### Intel compilers
-    # - name: cache-intel-compilers
-    #   id: cache-intel-compilers
-    #   if: contains(matrix.fortran-compiler, 'ifort')
-    #   uses: actions/cache@v2
-    #   with:
-    #     path: /opt/intel
-    #     key: intel-${{ runner.os }}-compilers-b
+      run: sudo apt-get install gfortran
 
     - name: Fix install script
       shell: bash
