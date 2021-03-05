@@ -1,0 +1,64 @@
+##Coordinate file
+#
+crd input.crd
+#
+##Parameter file
+#
+parm inputA2.prm
+#
+##Auxiliary file
+#
+aux input.aux
+#
+##Basis file
+#
+bas input.bas
+#
+##Density file
+#
+dens H2O_MP2_augccPVTZ.fchk 
+#
+##Use constraint
+#
+constr
+#
+##Print debug info
+#
+#debug
+#
+##Use cartesian gaussians for fit
+#
+cart
+#
+##Print cubes to file 
+#
+print
+#
+##Name of output files for multipoles and local hermites
+#
+head test_GEMFIT 
+#
+## Which operator to use for fit (S=overlap, D=Damped Coulomb) Default=Coulomb
+#
+#type = D
+#
+##Whether to use spherical grids for numerical fit (need file "sphere_fit in au)
+#
+sphere 
+HLYfit
+#GEMESP
+#
+##Size of grid (1=xcoarse, 2=medium, 3=fine, 4=fine, 5=xfine)
+#
+#radnum 100
+#angnum 41
+grdsize 1 
+#
+##Damping parameter for damped Coulomb
+#
+#beta 0.000000001
+#
+#
+##Scaling parameter for G diagonal (Tychonov lambda)
+#
+scale 0.000000001 

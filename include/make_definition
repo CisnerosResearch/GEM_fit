@@ -1,0 +1,5 @@
+g95 -c -DPUBFFT -traditional -I../../include -DDEBUG   -fbounds-check -Wimplicit-none -Wunused-vars -O3 -o definition.o definition.f90
+g95 -c -DPUBFFT -traditional -I../../include -DDEBUG   -fbounds-check -Wimplicit-none -Wunused-vars -O3 -o cubes.o cubes.f90
+
+ifort -c -DPUBFFT -I../../include -DDEBUG  -c -w -O3 -tpp6 -align  -O3 -o definition.o definition.f90
+ifort -c -DPUBFFT -I../../include -DDEBUG -c -w -O3 -tpp6 -align  -O3 -o cubes.o cubes.f90

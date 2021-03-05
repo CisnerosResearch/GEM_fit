@@ -1,0 +1,17 @@
+
+! Mode flags for fourier method
+integer MODE_CEXP;     parameter( MODE_CEXP = 1 )
+integer MODE_SINCOS;   parameter( MODE_SINCOS = 2 )
+integer MODE_SAVEHXKY; parameter( MODE_SAVEHXKY = 3 )
+integer MODE_SAVEHX;   parameter( MODE_SAVEHX = 4 )
+
+! max primative symmops=24
+! max symmops=96 (same for protein-only, i.e. F4132) 
+integer sg_maxsymop; parameter(sg_maxsymop=96)
+
+! functions available in xray.f90
+double precision xray_S
+logical xray_refl_au_check
+logical xray_refl_sysabs
+double precision xray_sfac
+

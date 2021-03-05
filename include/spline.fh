@@ -1,0 +1,3 @@
+
+! function type:
+integer SPLN_cache !(int p_spline)

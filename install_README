@@ -1,0 +1,154 @@
+GEM_fit: Program to calculate GEM Hermites and multipoles with either
+         a numerical or analytical fit from a Gaussian formatted checkpoint
+         file.
+
+To install:
+
+after uncompressing go into the main directory (GEM_fit) and:
+
+-modify "setup" and "setup.profile" so that it points to the correct
+directory
+
+-source the corresponding file (setup for tcsh, setup.profile for bash)
+
+-modify "config.mak" to choose compiler, either ifort or gfortran. 
+
+-modify "config.mak" to change location for BLAS and LAPACK, note that
+ the program will not generate any executable if it cannot link to both.
+
+-make
+
+After making you should see three executables: "GEM_fit, GEM_calc_coefs,
+GEM_site_site and GEM_site_site2". The first is for the numerical fitting,
+the second for analytical fitting and the last two to calculate intermolecular
+interactions with the hermites or multipoles.
+______________________________________________________________________________
+
+There is a testing directory: GEM_fit_TEST;
+
+To run the numerical fit, go to the directory and run: 
+$GEMNF_HOME/GEM_fit -control input.control. 
+
+For the analytical fit the command is:
+$GEMNF_HOME/GEM_calc_coefs -control input.control. 
+NOTE: you need to change the name in the "head" option (see below) so that
+      you don't overwrite the Hermite and multipoles.
+
+The control file tells the program the names of the files and variable values.
+
+______________________________________________________________________________
+The files needed include: 
+
+*.crd: coordinate file in GEM format, has to match the Gaussian input file
+
+*.prm: parameter file, defines auxiliary basis, orbital basis, nuclear charges,
+       and local frames. The local frame definition for this example is exactly
+       the same as TINKER
+
+*.aux: database of auxiliary functions
+
+*.bas: database of atomic orbital basis (AOs), if you change the basis set
+       in your g09 calculation you should check that the basis match (gfprint
+       option in gaussian).
+
+*.fchk: formatted checkpoint file from Gaussian. NOTE: the density should
+        be generated with the following options: "nosymm 6d 10f"
+        This is to ensure that the molecule is not re--oriented and g09 uses
+        cartesian orbitals only.
+
+Options for fitting:
+
+cart: should always be on
+
+print: print cubes to file, useful if you don't want to calculate cubes every
+       time, only used for numerical fitting
+
+head "filename": this gives the name for the output files
+
+sphere: default for GEM_fit, only used for numerical fit to use spherical grids.
+
+HLYfit: only for numerical fit, use smooth cutoff for discarding points.
+        I recommend it on all the time.
+
+GEMESP: If cubegen is not available, this flag will allow GEM to calculate
+        the ESP with internal routines (This is much slower than cubegen).
+
+grdsize #: size of spherical grid, options go from extra coarse (1) to
+           extra fine (5). In addition, you can select a larger or smaller
+           grid by uncommenting "radnum" (number of radial points) and
+           "angnum" (number of angular points).
+
+type: Only used for analytical fit: What operator to use for the metric
+      (Overlap, Coulomb or Damped Coulomb). Coulomb is default and the
+      recommended option. Damped Coulomb is only necessary for very 
+      noisy fits.
+
+beta: Only used for analytical fit: this is the parameter for the damped
+      coulomb operator, NOTE: "type" has to be set to "D"
+
+scale #: This parameter is used for both fits and determines the Lambda
+         for the Tickonov regularization. This is the parameter that is
+         optimized to get the most accurate intermolecular Coulomb from the
+         GEM hermites (filename.lherm) compared to full QM.
+______________________________________________________________________________
+
+After running you will see some data dumped on the screen including 
+fitting details from the control file, electron charges after the fit,
+total dipoles and ESP at the origin. In addition, several files will be
+generated:
+
+(filename refers to the name chosen for the output files, "test_GEMFIT"
+in the example) 
+
+filename.lhermite: Hermite coefficients in local frame.
+
+filename.mpoles_NEW: GEM--DM in local frame for use with GEM_site_site*
+
+filename.mpoles.TINK: GEM--DM in local frame for TINKER, this file is
+                      the input for poleditGEM
+
+In addition, for the numerical fit five more files are written:
+
+grd_pts.xyz and grd_pts2.xyz: these files have the cartesian coordinates
+                              (and weights) for the spherical grids. If they
+                              are not available the program will generate
+                              them based on the "size". If they are available
+                              they will be read in.
+
+sphere_ESP.cube: ESP evaluated at each point on the grid. The number of lines
+                 on this file must match the above two files.
+
+GEM.cubeGmat and GEM.cubeJvec: These are intermediate files for GEM (G matrix
+                               and J vector). They are matched to the current
+                               grid, AO basis and ABS. They are written out
+                               to save time to avoid having to calculate them
+                               every time when the "scale" (Tickonov lambda)
+                               is being optimized. NOTE: if you change the
+                               grid size, fchk file (density), orbitals,
+                               ABS, etc. you need to recalculate these.
+______________________________________________________________________________
+
+
+Once the outputs are generated you can test by calculating the intermolecular
+Coulomb interaction by executing:
+
+$GEMNF_HOME/GEM_site_site -crd dimer.crd -lherm test_GEMFIT.lhermite -aux input.aux -parm inputA2.prm
+
+This will run the calculation using the GEM Hermites. The results for the
+example are in: "OUTPUT_GEM_site_site_Hermite" and you should get an energy
+around -9.17657900512190 kcal/mol
+
+To compare with GEM--DM use:
+
+$GEMNF_HOME/GEM_site_site -crd dimer.crd -lherm test_GEMFIT.mpoles_NEW -aux input.aux -parm inputMP.prm
+
+This will run the calculation using the GEM--DM. The results for the
+example are in: "OUTPUT_GEM_site_site_GEM-DM" and you should get an energy
+around -6.31012287773050 kcal/mol (Note the -3 kcal/mol difference, from
+the penetration error)
+
+
+If you have questions feel free to email me:
+
+andres@unt.edu
+

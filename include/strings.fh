@@ -1,0 +1,30 @@
+! Public include file for String utility functions
+
+!
+! function types
+! In strings.f:
+      !integer Len_Trim      !(str)
+      integer str_spn !(str,accept)
+      integer str_cspn!(str,reject)
+      character char_toupper !(char)
+      character char_tolower !(char)
+      logical char_is_digit !(char)
+      logical char_is_alpha !(char)
+
+      logical str_next_param 
+      integer str_lookup_token !(tok,list,ntok)
+
+! Wrappers to C calls in str_c.c
+      integer atoi
+      integer atol
+      integer strtol
+      double precision atod
+
+! In buffers.f:
+
+      integer Allocate_Buffer !(lines,width,name)
+
+! Genral purpose scratch space for string functions
+      character(len=256) buffer_temp
+      common /buffer_tmp/ buffer_temp
+

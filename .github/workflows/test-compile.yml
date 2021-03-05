@@ -1,0 +1,75 @@
+name: GEM_fit-Compile
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # This workflow contains a single job called "test"
+  test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      fortran-compiler: gfortran
+    #   matrix:
+    #     fortran-compiler: [gfortran, gfortran-8, gfortran-9, ifort]
+    # env:
+    #   F90: ${{ matrix.fortran-compiler }}
+    #   FC: ${{ matrix.fortran-compiler }}
+
+    steps:
+    ## Checkout the repository
+    - uses: actions/checkout@v2
+
+    ## Deal with Fortran compiler installation
+    # Install gfortran
+    - name: Install gfortran compiler
+      if: contains(fortran-compiler, 'gfortran')
+      run: sudo apt-get install ${{ fortran-compiler }}
+
+    ### gfortran compiler in Matrix
+    # - name: Install gfortran compiler
+    #   if: contains(matrix.fortran-compiler, 'gfortran')
+    #   run: sudo apt-get install ${{ matrix.fortran-compiler }}
+
+    ### Intel compilers
+    # - name: cache-intel-compilers
+    #   id: cache-intel-compilers
+    #   if: contains(matrix.fortran-compiler, 'ifort')
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: /opt/intel
+    #     key: intel-${{ runner.os }}-compilers-b
+
+    - name: Fix install script
+      shell: bash
+      ## Make sure that Linux has the libraries it needs.
+      ## Makefile also needs to be modified, to reflect the platform.
+        #if [ ${{ matrix.fortran-compiler }} == ifort ]; then sed -i 's/PLATFORM = gfortran/PLATFORM = ifort/g' config.mak; fi
+        #if [ ${{ matrix.fortran-compiler }} == gfortran ]; then sed -i 's/PLATFORM = ifort/PLATFORM = gfortran/g' config.mak; fi
+      ## Figure out Intel compiler at a later time....
+      ## Fix the executable path in the setup
+        #sed -i 's:GEMNF_HOME=${HOME}/GEM_fit:GEMNF_HOME=/new/path/GEM_fit:g' setup.profile
+      ## Source the setup
+      run: |
+        sudo apt install libblas-dev liblapack-dev
+
+        source setup.profile
+
+    - name: Install
+      shell: bash {0}
+      ## Do this separately so errors cause the job to fail
+      run: |
+        make
+
+    - name: Clean
+      shell: bash {0}
+      run: |
+        make clean
+

@@ -1,0 +1,14 @@
+   integer O_RDONLY;   parameter(O_RDONLY=0)
+   integer O_WRONLY;   parameter(O_WRONLY=1)
+   integer O_RDWR;     parameter(O_RDWR=2)
+   integer O_CREAT;    parameter(O_CREAT=64)   !not fcntl
+   integer O_EXCL;     parameter(O_EXCL=128)   !not fcntl
+   integer O_NOCTTY;   parameter(O_NOCTTY=256) !not fcntl
+   integer O_TRUNC;    parameter(O_TRUNC=512)  !not fcntl
+   integer O_APPEND;   parameter(O_APPEND=1024)
+   integer O_NONBLOCK; parameter(O_NONBLOCK=2048)
+   integer O_NDELAY;   parameter(O_NDELAY=O_NONBLOCK)
+   integer O_SYNC;     parameter(O_SYNC=4096)
+   integer O_FSYNC;    parameter(O_FSYNC=O_SYNC)
+   integer O_ASYNC;    parameter(O_ASYNC=8192)
+

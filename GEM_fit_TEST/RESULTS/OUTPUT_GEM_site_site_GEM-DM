@@ -1,0 +1,12 @@
+ loadbasis: nbasis =            2
+ num primitives =            6
+ num auxis =            2
+ ncoeff =           60
+ num_deflist =           14
+ ires,jres =            1           2
+ tot_NN,tot_EE,tot_NE =    18.5867856671658        18.5526915351668     
+   37.1495330147942     
+ tot respair ene =  -1.005581246152332E-002    in kcals = 
+  -6.31012287773050     
+ total system energy =   -6.31012287773050     
+ total exchange (kcal/mol) =   0.000000000000000E+000

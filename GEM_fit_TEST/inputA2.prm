@@ -1,0 +1,15 @@
+sitetype   O    1
+sitetype   H1   2
+sitetype   H2   2
+frame    H1  1  1   O   H2
+frame    H2  1  1   O   H1
+frame    O   2  1   H1  H2  H2
+molframe O
+type        1   8   15.995   "Water O"
+type        2   1    1.008   "Water H" 
+auxtype  1 2
+auxtype  2 1
+auxbasis A-HYDROGEN HYDROGEN H (4) (A2-DZVP) H (A2) 
+auxbasis A-OXYGEN OXYGEN O (4,0,3) (A2-DZVP) O (A2)
+AObasis O-HYDROGEN HYDROGEN H (augPVTZb)
+AObasis O-OXYGEN OXYGEN O (augPVTZb)

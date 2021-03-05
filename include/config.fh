@@ -1,0 +1,31 @@
+#ifndef _config_fh_
+#define _config_fh_
+#include "dprec.fh"
+
+#if defined __EFC
+#define ZPTR 'Z16.16'
+#define SIZEOF_INTEGER 8
+#define SIZEOF_REAL 8
+#define NUL '\0'
+
+#elif defined __IFC
+#define ZPTR 'Z8.8'
+#define SIZEOF_INTEGER 4
+#define SIZEOF_REAL 8
+#define NUL '\0'
+
+!// Assume G77 with -xf77-cpp-input
+#elif defined __GNUC__ || defined MAKEDEP
+#define ZPTR 'Z8.8'
+#define SIZEOF_INTEGER 4
+#define SIZEOF_REAL 8
+#define NUL '\000'
+
+#else
+#error System type not recognized!
+#endif
+
+#define SIZEOF_LOGICAL SIZEOF_INTEGER
+
+#endif 
+!#endif !//_config_fh_
