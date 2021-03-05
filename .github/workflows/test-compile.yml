@@ -40,7 +40,7 @@ jobs:
       ## Source the setup
       run: |
 
-        sudo apt install locate
+        sudo apt install libblas-dev liblapack-dev locate
 
         sed -i 's:GEMNF_HOME=${HOME}/GEM_fit:GEMNF_HOME=/home/runner/work/GEM_fit/GEM_fit/:g' setup.profile
 
