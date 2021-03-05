@@ -72,7 +72,8 @@ FC= gfortran
 
 # FLAGS para gfortran
 #FSTDFLAGS= -c -fbounds-check -w -fPIC -fno-range-check
-FSTDFLAGS= -c -w -fPIC -fno-range-check
+#FSTDFLAGS= -c -w -fPIC -fno-range-check
+FSTDFLAGS= -c -w -fPIC -fno-range-check -std=legacy
 
 F90FLAGS=
 F77FLAGS=
