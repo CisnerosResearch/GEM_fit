@@ -31,7 +31,6 @@ jobs:
     ## Deal with Fortran compiler installation
     # Install gfortran
     - name: Install gfortran compiler
-      if: contains(fortran-compiler, 'gfortran')
       run: sudo apt-get install ${{ fortran-compiler }}
 
     ### gfortran compiler in Matrix
