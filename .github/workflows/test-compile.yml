@@ -39,6 +39,9 @@ jobs:
         #GitHub CI is /home/runner/work/
       ## Source the setup
       run: |
+
+        sudo apt install locate
+
         sed -i 's:GEMNF_HOME=${HOME}/GEM_fit:GEMNF_HOME=/home/runner/work/GEM_fit/GEM_fit/:g' setup.profile
 
         source setup.profile
