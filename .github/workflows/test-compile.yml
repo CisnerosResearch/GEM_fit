@@ -24,7 +24,7 @@ jobs:
     ## Deal with Fortran compiler installation
     # Install gfortran
     - name: Install gfortran compiler
-      run: sudo apt-get install gfortran-7
+      run: sudo apt-get install gfortran
 
     - name: Fix install script
       shell: bash
