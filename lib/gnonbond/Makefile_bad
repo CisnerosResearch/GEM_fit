@@ -1,0 +1,19 @@
+ifndef $(PROJECT_ROOT)
+  PROJECT_ROOT=../..
+endif
+include $(PROJECT_ROOT)/config.mak
+
+NAME = $(notdir $(shell pwd))
+
+# If all three source definitions are blank, libdir.mak
+# will automatically include all *.c, *.f, and *.f90 files.
+F90_SOURCE= g_Nmcmurch_dav.f90 g_table_boys.f90 g_mcmurch_dav.f90 \
+            g_MD_recur.f90 g_Boys_lookup.f90 \
+            g_NMmD_S.f90 g_MD_recur_CART.f90 g_MD_recur_Jvec_CART.f90 \
+            g_NMmD_S.f90
+F_SOURCE= 
+C_SOURCE=
+
+include ../libdir.mak
+sinclude depend.mak
+

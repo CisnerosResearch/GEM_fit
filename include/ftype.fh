@@ -1,0 +1,8 @@
+
+! ctype function types
+logical ch_isalnum, ch_isalpha, ch_iscntrl, ch_isdigit, &
+        ch_islower, ch_isgraph, ch_isprint, ch_ispunct, &
+        ch_isspace, ch_isupper, ch_isxdigit
+
+character ch_toupper, ch_tolower
+

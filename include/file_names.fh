@@ -1,0 +1,4 @@
+  character(len=PATH_MAX)filedb,fileout,filerestrt,filehead,  &
+                         myout,mydb,myrestrt
+  common/filename/filedb,fileout,filerestrt,filehead,  &
+                         myout,mydb,myrestrt

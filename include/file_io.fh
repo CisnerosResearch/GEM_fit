@@ -1,0 +1,40 @@
+
+! from fcntl.h
+   integer O_RDONLY;   parameter(O_RDONLY=0)
+   integer O_WRONLY;   parameter(O_WRONLY=1)
+   integer O_RDWR;     parameter(O_RDWR=2)
+   integer O_CREAT;    parameter(O_CREAT=64)
+   integer O_EXCL;     parameter(O_EXCL=128)
+   integer O_NOCTTY;   parameter(O_NOCTTY=256)
+   integer O_TRUNC;    parameter(O_TRUNC=512)
+   integer O_APPEND;   parameter(O_APPEND=1024)
+   integer O_NONBLOCK; parameter(O_NONBLOCK=2048)
+   integer O_NDELAY;   parameter(O_NDELAY=O_NONBLOCK)
+   integer O_SYNC;     parameter(O_SYNC=4096)
+   integer O_FSYNC;    parameter(O_FSYNC=O_SYNC)
+   integer O_ASYNC;    parameter(O_ASYNC=8192)
+
+
+! Now days, most systems put FILENAME_MAX at a generous value of
+! 1024 to 4096. However, even 256 is plenty in most cases.
+    integer FILENAME_MAX_LEN; parameter(FILENAME_MAX_LEN=512)
+
+!functions
+    integer File_Open
+    logical File_Exists
+
+    integer fd_open !(char *filename, int *mode, int filename_len);
+    integer fd_read !(int *fd, void *buffer, size_t *len);
+    integer fd_write !(int *fd, void *buffer, size_t *len);
+    integer fd_close !(int *fd);
+    integer stream_open !(char *filename, char *mode, int filename_len, int mode_len);
+    integer stream_read !(FILE **ppFile, void *buffer, size_t *len);
+    integer stream_write !(FILE **ppFile, void *buffer, size_t *len);
+    integer stream_tell  !(FILE **ppFile);
+    integer stream_close !(FILE **ppFile);
+    integer gz_open !(char *filename, char *mode, int filename_len, int mode_len);
+    integer gz_read !(gzFile *pFile, void *buffer, size_t *len);
+    integer gz_write !(gzFile *pFile, void *buffer, size_t *len);
+    integer gz_tell !(gzFile *pFile);
+    integer gz_close !(gzFile *pFile);
+

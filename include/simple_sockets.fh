@@ -1,0 +1,106 @@
+! Fortran77 wrapper to Simple Sockets.
+! C Pointers are treated as regular F77 integers:
+! 64 bit pointers will break if the default integer is 32 bit.
+
+!* sockets.h: this file is the header file for the tlm socket function
+!*   library
+!*
+!*  Version: 2.10f
+!*        Authors: Dr. Charles E. Campbell, GSFC/NASA
+!*           Terry McRoberts, GSFC/NASA
+!* --------------------------------------------------------------------------
+
+! standard PortMaster port -- IANA registered
+  integer*2 PORTMASTER;  parameter(PORTMASTER=1750)
+
+! CAUTION: Values must be sent in network-endian order.
+! Use skt_htons(PM_*) to ensure proper byte-swapping.
+! These are just simple wrappers to C functions.
+  integer*4 skt_htonl, skt_ntohl
+  integer*2 skt_htons, skt_ntohs
+
+  integer SKT_EOF; parameter(SKT_EOF=-1)
+
+  integer SIZEOF_SKTEVENT; parameter(SIZEOF_SKTEVENT=2)
+! PortMaster messages
+  integer*2 PM_SERVER;   parameter(PM_SERVER =  1)
+  integer*2 PM_CLIENT;   parameter(PM_CLIENT =  2)
+  integer*2 PM_CLOSE;    parameter(PM_CLOSE  =  3)
+  integer*2 PM_RESEND;   parameter(PM_RESEND =  4)
+  integer*2 PM_QUIT;     parameter(PM_QUIT   =  5)
+  integer*2 PM_SORRY;    parameter(PM_SORRY  =  6)
+  integer*2 PM_OK;       parameter(PM_OK     =  7)
+  integer*2 PM_ACCEPT;   parameter(PM_ACCEPT =  8)
+  integer*2 PM_TABLE;    parameter(PM_TABLE  =  9)
+  integer*2 PM_RMSERVER; parameter(PM_RMSERVER=10)
+  integer*2 PM_FWINIT;   parameter(PM_FWINIT = 11)
+  integer*2 PM_SHARE;    parameter(PM_SHARE  = 12)
+  integer*2 PM_OKSHARE;  parameter(PM_OKSHARE= 13)
+
+  integer PM_BIGBUF;     parameter(PM_BIGBUF=1024)
+  integer PM_MAXTRY;     parameter(PM_MAXTRY=20) ! max number of resends to PortMaster
+  integer PM_MAXREQUESTS;parameter(PM_MAXREQUESTS = 10) ! max pending connects
+
+!* --------------------------------------------------------------------------
+!* Typedef Section
+!*
+  !typedef int PrtMstrEvent;
+  !typedef struct Skt_str Socket;
+  !typedef struct Smask_str Smask;
+  !typedef u_short SKTEVENT;
+  !typedef struct sockaddr_in sinpt;
+
+!* --------------------------------------------------------------------------
+!* Data Structures:
+!*
+! struct Skt_str {
+!   int skt;                    ! skt handle
+!   SKTEVENT port;              ! associated port
+!   int type;                   ! PM_SERVER, PM_CLIENT, PM_ACCEPT
+!   char *sktname;              ! name of socket
+!   char *hostname;             ! name of host
+! };
+
+! struct Smask_str {
+!   fd_set mask;
+!   unsigned waitall;
+! };
+
+!* --------------------------------------------------------------------------
+!* Prototypes:
+!* All functions and commands listed, with F77-irrelevant parts commented out.
+!* Note: string arguments list the hidden string-length argument here.
+
+  !void skt_init !(void);
+  !void skt_mask_pop !(void);
+  !void skt_mask_push !(void);
+  integer skt_mask_test !(void);
+  integer skt_mask_wait !(void);
+  integer skt_accept !(int skt);
+  !void skt_close !(int skt);
+  integer skt_gets !(char buf, int skt, int __buf_len);
+  !void skt_mask_set !(int skt);
+  !void skt_mask_time !(int seconds, int useconds);
+  !void skt_mask_unset !(int skt);
+  integer skt_mask_isset !(int skt);
+  integer skt_open !(char skthost, char mode, int __len_skthost, int __len_mode);
+  integer skt_open_client_port !(char hostname, char sktname, int port, int __len_hostname, int __len_sktname);
+  integer skt_openv !(char sktname, char ctrl, char env_var, int __len_sktname, int __len_ctrl, int __len_env_var);
+  integer skt_peek !(int skt, void buf, int buflen);
+  integer skt_peek_string !(int skt, char buf, int buflen);
+  integer skt_peer_addr !(int skt);
+  integer skt_peer_name !(int skt, char name, int __len_name);
+  integer skt_prtskt !(int skt, char desc, int __len_desc);
+  integer skt_read_bytes !(int skt, void buf, int buflen);
+  integer skt_read !(int skt, void buf, int buflen);
+  integer skt_rmsrvr !(char skthost, int __len_skthost);
+  integer skt_test !(int skt);
+  integer skt_timeoutwait !(int skt, int seconds, int useconds);
+  integer skt_wait !(int skt);
+  integer skt_write !(int skt, void buf, int buflen);
+  integer skt_handle_of !(int skt);
+  integer skt_port_of !(int skt);
+  integer skt_type_of !(int skt);
+  integer skt_sktname_of !(int skt, char name, int __len_name);
+  integer skt_hostname_of !(int skt, char name, int __len_name);
+

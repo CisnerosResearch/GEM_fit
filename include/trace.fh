@@ -1,0 +1,51 @@
+!/* CPP defines for trace functions */
+#ifndef _TRACE_FH
+#define _TRACE_FH
+
+!#define NEXT_ARG(p,t,s) ARGnum=ARGnum+1; ARGp(ARGnum)=p; ARGt(ARGnum)=t; ARGs(ARGnum)=s
+
+#ifndef NDEBUG
+
+#define  TRACE0(sub) call trace0(sub)
+#define  TRACE1(sub) call trace1(sub,
+#define  TRACE2(sub) call trace2(sub,
+#define  TRACE3(sub) call trace3(sub,
+#define  TRACE4(sub) call trace4(sub,
+#define  TRACE5(sub) call trace5(sub,
+#define  TRACE6(sub) call trace6(sub,
+#define  TRACE7(sub) call trace7(sub,
+#define  TRACE8(sub) call trace8(sub,
+#define  TRACE9(sub) call trace9(sub,
+#define  TRACE10(sub) call trace10(sub,
+#define  TRACE11(sub) call trace11(sub,
+#define  TRACE12(sub) call trace12(sub,
+#define  TRACE13(sub) call trace13(sub,
+#define  TRACE14(sub) call trace14(sub,
+#define  TRACE15(sub) call trace15(sub,
+#define  TRACE16(sub) call trace16(sub,
+
+#else
+
+#define  TRACE0(sub) call sub()
+#define  TRACE1(sub) call sub(
+#define  TRACE2(sub) call sub(
+#define  TRACE3(sub) call sub(
+#define  TRACE4(sub) call sub(
+#define  TRACE5(sub) call sub(
+#define  TRACE6(sub) call sub(
+#define  TRACE7(sub) call sub(
+#define  TRACE8(sub) call sub(
+#define  TRACE9(sub) call sub(
+#define  TRACE10(sub) call sub(
+#define  TRACE11(sub) call sub(
+#define  TRACE12(sub) call sub(
+#define  TRACE13(sub) call sub(
+#define  TRACE14(sub) call sub(
+#define  TRACE15(sub) call sub(
+#define  TRACE16(sub) call sub(
+
+#endif
+
+#endif /* _TRACE_FH */
+
+

@@ -1,0 +1,2 @@
+  integer TYPE_EWALD_DSUM; parameter(TYPE_EWALD_DSUM = 0)
+  integer TYPE_COULOMB_SUM; parameter(TYPE_COULOMB_SUM = 1)

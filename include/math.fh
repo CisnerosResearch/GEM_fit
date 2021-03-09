@@ -1,0 +1,109 @@
+
+double precision M_LOG2E   ! log2(e)
+parameter(M_LOG2E = 1.4426950408889634073599246810018922D0)
+
+double precision M_LOG10E  ! log10(e)
+parameter(M_LOG10E = 0.4342944819032518276511289189166051D0)
+
+double precision M_LN2     ! ln(2)
+parameter(M_LN2 = 0.6931471805599453094172321214581766D0)
+
+double precision M_LN10    ! ln(10)
+parameter(M_LN10 = 2.3025850929940456840179914546843642D0)
+
+double precision M_PI      ! pi
+parameter(M_PI = 3.1415926535897932384626433832795029D0)
+
+double precision M_PI_2    ! pi/2
+parameter(M_PI_2 = 1.5707963267948966192313216916397514D0)
+
+double precision M_PI_4    ! pi/4
+parameter(M_PI_4 = 0.7853981633974483096156608458198757D0)
+
+double precision M_1_PI    ! 1/pi
+parameter(M_1_PI = 0.3183098861837906715377675267450287D0)
+
+double precision M_2_PI    ! 2/pi
+parameter(M_2_PI = 0.6366197723675813430755350534900574D0)
+
+double precision M_2_SQRTPI ! 2/sqrt(pi)
+parameter(M_2_SQRTPI = 1.1283791670955125738961589031215452D0)
+
+double precision M_SQRT2   ! sqrt(2)
+parameter(M_SQRT2 = 1.4142135623730950488016887242096981D0)
+
+double precision M_SQRT1_2 ! 1/sqrt(2)
+parameter(M_SQRT1_2 = 0.7071067811865475244008443621048490D0)
+
+double precision M_TWOPI   ! 2 * pi
+parameter(M_TWOPI = 6.2831853071795864769252867665590058D0)
+
+! Above are from math.h
+
+double precision M_R2D     ! degrees to radians
+parameter(M_R2D = 180.0D0/M_PI)
+
+double precision M_D2R     ! radians to degrees
+parameter(M_D2R = M_PI/180.0D0)
+
+!-------------------------------------------------------------
+! Limits of integral types.
+! 64-bit constants seem non-standard
+
+! Minimum of signed integral types.
+integer M_INT8_MIN
+parameter(M_INT8_MIN  = -128)
+integer M_INT16_MIN
+parameter(M_INT16_MIN = -32768)
+integer M_INT32_MIN
+parameter(M_INT32_MIN = -2147483648)
+!integer*8 M_INT64_MIN
+!parameter(M_INT64_MIN = -9223372036854775808_8)
+
+! Maximum of signed integral types.
+integer M_INT8_MAX
+parameter(M_INT8_MAX  = 127)
+integer M_INT16_MAX
+parameter(M_INT16_MAX = 32767)
+integer M_INT32_MAX
+parameter(M_INT32_MAX = 2147483647)
+!integer*8 M_INT64_MAX
+!parameter(M_INT64_MAX = 9223372036854775807_8)
+
+! float properties
+real*4 M_FLT_EPSILON
+parameter(M_FLT_EPSILON = 1.19209290E-07)
+
+real*4 M_FLT_MAX
+parameter(M_FLT_MAX = 3.40282347E+38)
+
+real*4 M_FLT_MIN
+parameter(M_FLT_MIN = 1.17549435E-38)
+
+
+! double properties
+real*8 M_DBL_EPSILON
+parameter(M_DBL_EPSILON = 2.2204460492503131D-16)
+
+real*8 M_DBL_MAX
+parameter(M_DBL_MAX = 1.7976931348623157D+308)
+
+real*8 M_DBL_MIN
+parameter(M_DBL_MIN = 2.2250738585072014D-308)
+
+!#if 0  /* not used for now */
+!! long double properties
+!real*16 M_LDBL_EPSILON
+!parameter(M_LDBL_EPSILON = 1.0842021724855044340075Q-19)
+!
+!real*16 M_LDBL_MAX
+!parameter(M_LDBL_MAX = 1.1897314953572317650213Q+4932)
+!
+!real*16 M_LDBL_MIN
+!parameter(M_LDBL_MIN = 3.3621031431120935062627Q-4932)
+!#endif
+
+!--------------------------------------------------------------
+
+
+

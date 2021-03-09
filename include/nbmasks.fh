@@ -1,0 +1,3 @@
+  integer EE_MASK;  parameter(EE_MASK = 1)
+  integer VDW_MASK;  parameter(VDW_MASK = 2)
+  integer POL_MASK;  parameter(POL_MASK = 4)

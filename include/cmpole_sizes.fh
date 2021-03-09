@@ -1,0 +1,12 @@
+      integer NCACHE
+      parameter (NCACHE=30)
+      integer MAXMP,MAXMPG
+      parameter (MAXMP=35)
+      parameter (MAXMPG=56)
+      integer sizFCTab
+      parameter (sizFCTab=501)
+      integer sizFTab
+      parameter (sizFTab=501)
+      integer MAXMcMD,MAXJ
+      parameter (MAXMcMD=715)
+      parameter (MAXJ=10)

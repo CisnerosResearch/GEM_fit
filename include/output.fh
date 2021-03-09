@@ -1,0 +1,4 @@
+integer P_ALWAYS
+parameter (P_ALWAYS=0)
+integer P_VERBOSE
+parameter (P_VERBOSE=1)
