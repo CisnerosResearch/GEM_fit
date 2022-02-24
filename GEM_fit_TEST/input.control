@@ -24,7 +24,7 @@ constr
 #
 ##Print debug info
 #
-#debug
+debug
 #
 ##Use cartesian gaussians for fit
 #

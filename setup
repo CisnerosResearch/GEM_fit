@@ -1,6 +1,6 @@
 
 ## CHANGE THIS
-setenv GEMNF_HOME ${HOME}/GEM_fit
+setenv GEMNF_HOME /tmp/GEM_fit
 
 if ($?LD_LIBRARY_PATH) then
   echo ":"$LD_LIBRARY_PATH":" | grep -q ":"$GEMNF_HOME/solib":" || \

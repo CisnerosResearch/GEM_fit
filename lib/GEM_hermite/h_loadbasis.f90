@@ -739,7 +739,7 @@ end subroutine aux_elec
 double precision function auxfun(n,i,j,dfac,fac)
   implicit none
   integer n,i,j
-  double precision dfac(0:18),fac(0:12)
+  double precision dfac(0:18),fac(0:14)
   
   double precision tmp
   if ((2*(n-i-j)-1) < 0) then
@@ -1028,7 +1028,7 @@ use definition
 
   integer nprim,ncoeff,order,jcoeff,nx,ny,nz,n,k,allochk,temp,j,times,i,l,contr
   integer scan_file
-  double precision pi, dfac(0:12),norm, ex, coef
+  double precision pi, dfac(0:18),norm, ex, coef
   double precision zero, one, two, pifac
   double precision,allocatable::normvec(:),coefvec(:),expvec(:)
   character(len=*) densfile
@@ -1272,7 +1272,7 @@ end subroutine AHBASE_calcAOnorms
       implicit none
       
       integer nprim, nx, ny, nz, dim, prim
-      double precision ex, norm, pifac, dfac(0:16)
+      double precision ex, norm, pifac, dfac(0:18)
       integer i, n
       double precision pi, post, one, zero, sum_exp, double_sum_exp, tmp
       double precision denom_x, denom_y, denom_z

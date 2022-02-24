@@ -23,7 +23,7 @@ GEM_calc_coefs: GEM_calc_coefs.o lib/libGEM.a
 
 .PHONY: lib
 lib:
-	mkdir solib
+	#mkdir solib
 	cd include; make
 	cd include/source_GRID; cc *.c -lm -o grid_gen.x; mv grid_gen.x ../../
 	cd lib; make
