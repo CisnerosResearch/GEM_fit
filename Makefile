@@ -45,6 +45,6 @@ realclean:
 	/bin/rm -f grid_gen.x GEM_site_site GEM_site_site2 GEM_fit GEM_calc_coefs
 	cd include; make realclean
 	cd lib; make realclean
-	/bin/rm -f solib/*
+	/bin/rm -rf solib
 	/bin/rm -f *~ *.o $(RESIDUE)
 
