@@ -10,6 +10,6 @@ type        2   1    1.008   "Water H"
 auxtype  1 2
 auxtype  2 1
 auxbasis A-HYDROGEN HYDROGEN H (4) (A2-DZVP) H (A2) 
-auxbasis A-OXYGEN OXYGEN O (4,0,3) (A2-DZVP) O (A2)
+auxbasis A-OXYGEN OXYGEN O (4-0-3) (A2-DZVP) O (A2)
 AObasis O-HYDROGEN HYDROGEN H (augPVTZb)
 AObasis O-OXYGEN OXYGEN O (augPVTZb)
