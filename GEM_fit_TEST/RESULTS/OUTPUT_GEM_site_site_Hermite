@@ -4,9 +4,9 @@
  ncoeff =           84
  num_deflist =           14
  ires,jres =            1           2
- tot_NN,tot_EE,tot_NE =    18.5867856671658        18.5452615102666     
-   37.1466709746709     
- tot respair ene =  -1.462379723848528E-002    in kcals = 
-  -9.17657900512190     
- total system energy =   -9.17657900512190     
- total exchange (kcal/mol) =    1.29931833219614
+ tot_NN,tot_EE,tot_NE =    18.5867856671658        18.5421200149003     
+   37.1421302773778     
+ tot respair ene =  -1.322459531175468E-002    in kcals = 
+  -8.29856580407918     
+ total system energy =   -8.29856580407918     
+ total exchange (kcal/mol) =   0.932154060661480
