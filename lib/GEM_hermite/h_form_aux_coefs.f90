@@ -213,7 +213,7 @@ use definition
         print *, "Optimal epsilon from DPC: ", epsilon
         deallocate(sigma, picard_coeffs, numerator_term)
   else
-        epsilon = 1.d-6
+        epsilon = 1.d-15
   endif
 
 ! print *, "Epsilon = ", epsilon                
