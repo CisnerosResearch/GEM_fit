@@ -19,7 +19,8 @@ subroutine HCRD_read_control(controlfile,parmfile,auxfile,basfile,crdfile,&
                              mpole_file,mpole_file2,mpole_file3,&
                              constrain,readdens,readbas,debug,cartfit,&
                              inttype,beta,scale,cutoff,printcube,&
-                             promolfit,twocentfit,cubetype,sphere,HLYfit)
+                             promolfit,twocentfit,cubetype,sphere,&
+                             HLYfit,dpc)
 use definition
   implicit none
   character(len=*) controlfile
@@ -36,6 +37,7 @@ use definition
   character(len=5) NAMEFMT
   logical constrain, readdens, readbas, debug, cartfit, printcube!,&
   logical promolfit,twocentfit,sphere,HLYfit,gemesp
+  logical dpc
   parameter (NAMEFMT='(A60)')
 
 ! NOTE: there are three types of integrals (int_type) available:
@@ -80,6 +82,7 @@ use definition
   mpole_file2 = ''
   mpole_file3 = ''
   filehead = ''
+  dpc = .false.
 
   controlunit = File_Open(controlfile,"r")
   if ( controlunit < 0 )then
@@ -215,6 +218,10 @@ use definition
                  .or. word(1:lenword) == 'CUTOFF')then
            read(line(8:),*) cutoff
            write(6,*)'HCRD_read_control: Will use cutoff for cube fit = ',cutoff
+        else if (word(1:lenword) == 'DPC' .or. word(1:lenword) == 'dpc' &
+                 .or. word(1:lenword) == 'Dpc')then
+           dpc = .true.
+           write(6,*) 'HCRD_read_control:Discrete Picard Condition will be utilized.'         
         else if (word(1:lenword) == 'scale' .or. word(1:lenword) == 'SCALE' &
                  .or. word(1:lenword) == 'SCALE')then
            read(line(7:),*) scale
@@ -282,6 +289,7 @@ use definition
   character(len=1) tmp_type
   character(len=5) NAMEFMT
   logical constrain, readdens, readbas, debug, cartfit, printcube, promolfit
+  logical dpc
   parameter (NAMEFMT='(A60)')
 
 ! NOTE: there are three types of integrals (int_type) available:
@@ -329,6 +337,7 @@ use definition
   mpole_file = ''
   mpole_file2 = ''
   filehead = ''
+  dpc = .false.
 
   controlunit = File_Open(controlfile,"r")
   if ( controlunit < 0 )then
@@ -444,6 +453,10 @@ use definition
            read(line(5:),*) kexchqmgem
            write(6,*)'HCRD_read_control: qmk option found, K for QM-GEM exch &
                       &will be ',kexchqmgem
+        else if (word(1:lenword) == 'DPC' .or. word(1:lenword) == 'dpc' &
+                 .or. word(1:lenword) == 'Dpc')then
+           dpc = .true.
+           write(6,*) 'HCRD_read_control:Discrete Picard Condition will be utilized.'
         else if (word(1:lenword) == 'exchk' .or. word(1:lenword) == 'ExchK' &
                  .or. word(1:lenword) == 'exchK' &
                  .or. word(1:lenword) == 'EXCHK')then

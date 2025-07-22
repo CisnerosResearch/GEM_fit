@@ -22,6 +22,7 @@ use definition
   character(len=3)dtype
   logical constrain, readdens, readbas, debug, cartfit, cube, printcube,&
           twocentfit, sphere, promolfit,HLYfit
+  logical dpc  !AR
 
   controlfile = ''
   arg=1
@@ -46,7 +47,7 @@ use definition
                          constrain,readdens,readbas,debug,cartfit,&
                          inttype,beta,scale,cutoff,&
                          printcube,promolfit,twocentfit,cubetype,sphere,&
-                         HLYfit)
+                         HLYfit,dpc)
   call AHCRD_read_file(site_info,crdfile)
   call AHBASE_load_auxnames(atom_auxis,parmfile)
   call AHBASE_load_auxbasis(atom_auxis,auxfile)
@@ -101,7 +102,7 @@ use definition
 
 !! invert G matrix and form coefficients
   call AH_form_aux_coefs(site_info,Gmat,Jvec,aux_coefs,ncoeff,scale,&
-                         constrain,debug)
+                         constrain,debug,dpc)
   deallocate(aux_coefs,Jvec,Gmat)
 
 !! NOW TRANSFORM CARTESIAN COEFS TO LOCAL HERMITE

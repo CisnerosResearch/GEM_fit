@@ -62,3 +62,6 @@ head test_GEMFIT
 ##Scaling parameter for G diagonal (Tychonov lambda)
 #
 scale 0.000000001 
+##Use DPC to optimize truncation parameter
+#
+dpc
