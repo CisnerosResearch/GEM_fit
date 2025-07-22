@@ -15,7 +15,7 @@
 !along with this program.  If not, see <http://www.gnu.org/licenses/>.
 !----------------------------------------------------------
 subroutine AH_form_aux_coefs(site_info,Gmat,Jvec,aux_coefs,ncoeff,scale,&
-                             constrain, debug)
+                             constrain, debug,dpc)
   ! GAC: subroutine to invert Gmat and calculate the auxiliary coefficients
   !      in hermite local frame
 use definition
@@ -34,7 +34,11 @@ use definition
   double precision ecoul_aux, ecoul_J, num_elec, num_elec_atm, ecoul_intermol
   logical constrain, debug
   !parameter(epsilon = 1.d-16, zero = 0.0d0)
-  parameter(epsilon = 1.d-15, zero = 0.0d0)
+  !parameter(epsilon = 1.d-15, zero = 0.0d0)
+  parameter(zero = 0.0d0)
+  double precision, allocatable:: sigma(:), picard_coeffs(:), numerator_term(:) !AR
+  double precision optimal_epsilon, min_derivative, elbow_index, epsilon_opt !AR
+  logical dpc  !AR
 
 ! first allocate all needed arrays
 
@@ -157,7 +161,64 @@ use definition
 5004 format (/,T2,'dsteqr failed to find eigenvalue for ',i3,', exiting'/)
      stop
   endif
+  
+! dpc = .true.
+! start DPC calculation
+  if (dpc) then
+         
+         allocate(sigma(ncoeff), stat = allochk)
+         if (allochk .gt. 0 ) then
+                write(6,*)'AH_form_aux_coefs:could not allocate sigma, exiting'
+                stop
+         endif
 
+         allocate(picard_coeffs(ncoeff), stat = allochk)
+         if (allochk .gt. 0 ) then
+                write(6,*)'AH_form_aux_coefs:could not allocate picard_coefficients, exiting'
+                stop
+         endif
+
+         allocate(numerator_term(ncoeff), stat = allochk)
+         if (allochk .gt. 0 ) then
+                write(6,*)'AH_form_aux_coefs:could not allocate s, exiting'
+                stop
+         endif
+
+         do i = 1, ncoeff
+                  sigma(i) = sqrt(abs(d(i)))  ! σ_i = singular value
+!                  sigma(i) = abs(d(i))
+                  numerator_term(i) = 0.d0
+                  do j = 1, ncoeff
+                            numerator_term(i) = picard_coeffs(i) + a(j,i)*Jvec(j)  ! u_i^T Jvec
+                  enddo
+                  picard_coeffs(i) = abs(numerator_term(i)) / sigma(i)     ! |u_i^T Jvec|/σ_i
+        enddo 
+        ! Write the values to a file for plotting
+        open(unit=10, file='picard_data.txt', status='replace')
+        write(10, '(A)') 'Index, Singular_Value, Numerator_Term, Picard_Coeff'
+        do i = 1, ncoeff
+            write(10, '(I6, 3ES16.6)') i, sigma(i), numerator_term(i), picard_coeffs(i)
+        enddo
+        close(10)
+
+        epsilon_opt = sigma(ncoeff)  ! Initialize to smallest σ_i
+        do i = 1, ncoeff-1
+        ! Look for the point where coefficients stop decaying
+                if (picard_coeffs(i+1) > picard_coeffs(i)) then
+                    epsilon_opt = sigma(i)    ! Set epsilon to σ_i at the "elbow"
+                    exit
+                endif
+        enddo
+        epsilon = epsilon_opt ** 2
+        print *, "Optimal epsilon from DPC: ", epsilon
+        deallocate(sigma, picard_coeffs, numerator_term)
+  else
+        epsilon = 1.d-6
+  endif
+
+! print *, "Epsilon = ", epsilon                
+
+ 
 ! quench and invert eigenvalues, and form y^-, theta^- and theta^-t
  
   if (debug) then
